@@ -6,17 +6,19 @@
 <title>Danforth Sorghum Team — Global Sorghum Conference 2026</title>
 <style>
   :root{
-    --bg:#faf8f3;
+    /* palette pulled from the sorghum-at-sunset hero photo:
+       dusk sky blue, deep navy, warm cream glow, near-black seed-head, muted gold */
+    --bg:#faf7f2;
     --card-bg:#ffffff;
-    --ink:#1f2a1e;
-    --ink-soft:#4a5a46;
-    --green-900:#1f3d24;
-    --green-700:#2f6b3a;
-    --green-500:#4f9a5a;
-    --green-100:#e4f1e2;
-    --gold:#c98a2c;
-    --border:#e3ddd0;
-    --shadow: 0 1px 3px rgba(31,42,30,0.08), 0 8px 24px rgba(31,42,30,0.06);
+    --ink:#211f1e;
+    --ink-soft:#5a564f;
+    --navy-900:#182a3d;
+    --navy-700:#2f4d70;
+    --sky-500:#7ea0c5;
+    --sky-100:#e2ecf4;
+    --gold:#b6924a;
+    --border:#e6ddd0;
+    --shadow: 0 1px 3px rgba(24,42,61,0.08), 0 8px 24px rgba(24,42,61,0.07);
   }
   *{box-sizing:border-box;}
   body{
@@ -27,17 +29,19 @@
     line-height:1.5;
   }
   header{
-    background: linear-gradient(135deg, var(--green-900), var(--green-700));
+    background: linear-gradient(135deg, var(--navy-900), var(--navy-700));
     color:#fff;
-    padding:56px 24px 72px;
+    padding:48px 24px 92px;
     text-align:center;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 42px), 0 100%);
     position:relative;
+    z-index:1;
   }
   header .eyebrow{
     text-transform:uppercase;
     letter-spacing:0.14em;
     font-size:0.75rem;
-    color:var(--green-100);
+    color:var(--sky-100);
     font-weight:600;
     margin-bottom:12px;
   }
@@ -52,8 +56,52 @@
   header p.lede{
     max-width:680px;
     margin:0 auto;
-    color:#e9f2e6;
+    color:#e7edf3;
     font-size:1.02rem;
+  }
+  .header-actions{
+    margin-top:20px;
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .hero-photo-wrap{
+    position:relative;
+    width:100%;
+    max-height:400px;
+    overflow:hidden;
+    line-height:0;
+    margin-top:-42px;
+  }
+  .hero-photo{
+    width:100%;
+    height:400px;
+    object-fit:cover;
+    object-position:center 55%;
+    display:block;
+    filter:contrast(1.08) saturate(1.15);
+  }
+  .hero-overlay{
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(to bottom, rgba(24,42,61,0.55) 0%, rgba(24,42,61,0) 22%),
+      linear-gradient(to top, var(--bg) 0%, rgba(250,247,242,0) 16%),
+      radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 55%, rgba(8,14,20,0.30) 100%),
+      linear-gradient(rgba(24,42,61,0.14), rgba(24,42,61,0.14));
+    pointer-events:none;
+  }
+  .hero-caption{
+    position:absolute;
+    right:18px;
+    bottom:16px;
+    margin:0;
+    font-size:0.72rem;
+    letter-spacing:0.02em;
+    color:rgba(255,255,255,0.9);
+    font-style:italic;
+    text-shadow:0 1px 4px rgba(0,0,0,0.55);
   }
   .wrap{
     max-width:1040px;
@@ -66,50 +114,80 @@
     border-radius:16px;
     box-shadow:var(--shadow);
     padding:28px 32px;
-    margin-top:-44px;
+    margin-top:36px;
     margin-bottom:40px;
   }
-  .intro-card h2{
+  .intro-flex{
+    display:flex;
+    align-items:center;
+    gap:28px;
+    flex-wrap:wrap;
+  }
+  .intro-text{ flex:1 1 320px; }
+  .intro-text h2{
     margin-top:0;
     font-size:1.1rem;
-    color:var(--green-900);
+    color:var(--navy-900);
   }
-  .intro-card p{ color:var(--ink-soft); margin-bottom:0; }
+  .intro-text p{ color:var(--ink-soft); margin-bottom:0; }
+  .team-photo-side{
+    flex:1 1 260px;
+    max-width:340px;
+    width:100%;
+    border-radius:12px;
+    box-shadow:var(--shadow);
+    display:block;
+  }
   .section-title{
     font-size:1.3rem;
-    color:var(--green-900);
-    margin:0 0 6px;
+    color:var(--navy-900);
+    margin:0 0 20px;
   }
-  .section-sub{
-    color:var(--ink-soft);
-    margin:0 0 24px;
-    font-size:0.95rem;
+  .theme-heading{
+    font-size:1rem;
+    font-weight:700;
+    color:var(--navy-700);
+    margin:0 0 14px;
+    padding-bottom:8px;
+    border-bottom:2px solid var(--sky-100);
   }
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
-    gap:20px;
-    margin-bottom:48px;
-  }
-  .poster-card{
-    background:var(--card-bg);
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:22px;
-    box-shadow:var(--shadow);
-    display:flex;
-    flex-direction:column;
-    gap:14px;
+  .theme-group{ margin-bottom:36px; }
+  .section-divider{
+    height:1px;
+    background: linear-gradient(to right, transparent, var(--border) 20%, var(--border) 80%, transparent);
+    margin:40px 0 44px;
     position:relative;
   }
-  .poster-card.featured{
-    border:2px solid var(--gold);
+  .section-divider::after{
+    content:"✦";
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    background:var(--bg);
+    padding:0 14px;
+    color:var(--gold);
+    font-size:0.85rem;
   }
-  .featured-tag{
+
+  .session-card{
+    background:var(--card-bg);
+    border:1px solid var(--border);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    padding:26px 30px;
+    margin-bottom:20px;
+    display:flex;
+    gap:22px;
+    flex-wrap:wrap;
+    position:relative;
+  }
+  .session-card.featured{ border:2px solid var(--gold); }
+  .session-card.talk{ border:2px solid var(--sky-500); }
+  .session-tag{
     position:absolute;
     top:-12px;
     left:18px;
-    background:var(--gold);
     color:#fff;
     font-size:0.7rem;
     font-weight:700;
@@ -119,62 +197,86 @@
     border-radius:999px;
     box-shadow:0 2px 6px rgba(0,0,0,0.15);
   }
-  .presenter-row{
-    display:flex;
-    align-items:center;
-    gap:12px;
-  }
-  .avatar{
-    width:52px;
-    height:52px;
+  .session-tag.gold{ background:var(--gold); }
+  .session-tag.navy{ background:var(--navy-700); }
+  .session-photo{
+    width:84px;
+    height:84px;
     border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:700;
-    font-size:1rem;
-    color:#fff;
+    object-fit:cover;
     flex-shrink:0;
+    box-shadow:0 0 0 3px var(--sky-100);
   }
-  .presenter-name{
-    font-weight:600;
-    font-size:0.98rem;
-    color:var(--ink);
-  }
-  .presenter-role{
+  .session-body{ flex:1; min-width:240px; }
+  .session-name{ font-weight:700; font-size:1.02rem; color:var(--ink); margin:0; }
+  .session-role{ font-size:0.85rem; color:var(--ink-soft); margin:2px 0 12px; }
+  .session-title{ font-size:1.1rem; font-weight:700; color:var(--navy-900); margin:0 0 8px; }
+  .session-theme{ font-style:italic; font-size:0.8rem; color:#9a8f6f; margin:-4px 0 10px; }
+  .session-summary{ font-size:0.92rem; color:var(--ink-soft); margin:0 0 10px; }
+  .session-meta{ font-size:0.85rem; color:var(--ink-soft); margin:0 0 10px; }
+  .session-meta strong{ color:var(--navy-900); }
+  .session-authors{
     font-size:0.8rem;
-    color:var(--ink-soft);
-  }
-  .poster-title{
-    font-size:1.05rem;
-    font-weight:700;
-    color:var(--green-900);
-    margin:0;
-  }
-  .poster-summary{
-    font-size:0.92rem;
-    color:var(--ink-soft);
-    margin:0;
-  }
-  .authors{
-    font-size:0.78rem;
     color:#8a8478;
     border-top:1px dashed var(--border);
     padding-top:10px;
-    margin-top:auto;
+    margin-top:6px;
   }
+  .session-authors strong{ color:var(--navy-900); font-weight:700; }
+
+  .contact-card{
+    background:var(--card-bg);
+    border:1px solid var(--border);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    padding:28px 32px;
+    margin-bottom:40px;
+    display:flex;
+    align-items:center;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .contact-avatar-img{
+    width:64px;
+    height:64px;
+    border-radius:50%;
+    object-fit:cover;
+    flex-shrink:0;
+    box-shadow:0 0 0 3px var(--sky-100);
+  }
+  .contact-body{ flex:1; min-width:220px; }
+  .contact-body h2{ margin:0 0 4px; font-size:1.05rem; color:var(--navy-900); }
+  .contact-body p{ margin:0 0 14px; color:var(--ink-soft); font-size:0.92rem; }
+  .contact-links{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+  .email-link{ color:var(--navy-700); font-size:0.88rem; text-decoration:none; font-weight:600; }
+  .email-link:hover{ text-decoration:underline; }
+
+  .btn{
+    display:inline-block;
+    padding:11px 22px;
+    background:#fff;
+    color:var(--navy-900);
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:700;
+    font-size:0.88rem;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+  }
+  .btn:hover{ background:var(--sky-100); }
+  .btn-solid{
+    background:var(--navy-700);
+    color:#fff;
+    box-shadow:none;
+  }
+  .btn-solid:hover{ background:var(--navy-900); }
+
   footer{
     text-align:center;
     padding:32px 24px 56px;
     color:var(--ink-soft);
     font-size:0.85rem;
   }
-  footer a{ color:var(--green-700); }
-  .photo-note{
-    font-size:0.72rem;
-    color:#a89f8c;
-    font-style:italic;
-  }
+  footer a{ color:var(--navy-700); }
 </style>
 </head>
 <body>
@@ -182,24 +284,60 @@
 <header>
   <div class="eyebrow">Donald Danforth Plant Science Center · Shakoor Lab</div>
   <h1>Our Team at the Global Sorghum Conference 2026</h1>
-  <p class="lede">Thanks for scanning our QR code! Our group is presenting six posters this week spanning AI-enabled phenotyping, genomics, and field trial management in sorghum. Here's the full lineup.</p>
+  <p class="lede">Thanks for scanning our QR code! Our group is presenting six posters and a talk this week spanning AI-enabled phenotyping, genomics, and field trial management in sorghum. Here's the full lineup.</p>
+  <div class="header-actions">
+    <a class="btn" href="https://shakoorlab.org" target="_blank" rel="noopener">Visit our lab website →</a>
+  </div>
 </header>
+
+<div class="hero-photo-wrap">
+  <img class="hero-photo" src="assets/hero-sorghum.jpg" alt="Sorghum field at sunset">
+  <div class="hero-overlay"></div>
+  <p class="hero-caption">Sorghum field at golden hour · Danforth field site</p>
+</div>
 
 <div class="wrap">
 
   <div class="intro-card">
-    <h2>About our group</h2>
-    <p>We're part of the Shakoor Lab at the Donald Danforth Plant Science Center in St. Louis, Missouri, working on high-throughput phenotyping, genomics, and data integration in sorghum. This page rounds up everything our team is presenting at this year's conference — stop by any of our posters to chat, or reach out afterward.</p>
+    <div class="intro-flex">
+      <div class="intro-text">
+        <h2>About our group</h2>
+        <p>We're part of the Shakoor Lab at the Donald Danforth Plant Science Center in St. Louis, Missouri, working on high-throughput phenotyping, genomics, and data integration in sorghum. This page rounds up everything our team is presenting at this year's conference — stop by any of our posters to chat, or reach out afterward.</p>
+      </div>
+      <img class="team-photo-side" src="assets/team-photo.jpg" alt="The Shakoor Lab team at the Donald Danforth Plant Science Center">
+    </div>
+  </div>
+
+  <h2 class="section-title">Talk</h2>
+  <div class="session-card talk">
+    <div class="session-tag navy">Invited Talk</div>
+    <img class="session-photo" src="assets/photos/nadia.jpg" alt="Nadia Shakoor, PhD">
+    <div class="session-body">
+      <p class="session-name">Nadia Shakoor, PhD</p>
+      <p class="session-role">Principal Investigator · Donald Danforth Plant Science Center — Co-founder &amp; Chief Scientific Officer, Agrela Ecosystems</p>
+      <p class="session-title">Researcher and Founder: Building Commercial Technology Without Leaving Science</p>
+      <p class="session-theme">Theme 4: Emerging technologies and their application potential – commercialization opportunities for the sorghum industry</p>
+      <p class="session-meta"><strong>When:</strong> September 16 · 4:00–4:20 PM CDT &nbsp;·&nbsp; <strong>Where:</strong> South Meeting Room 108–109</p>
+      <p class="session-summary">Dr. Shakoor bridges sorghum genomics, field phenotyping, digital agriculture, and technology commercialization. She has directed major initiatives including the Gates Foundation-funded Sorghum Genomics Toolbox and DOE's ARPA-E TERRA-REF project, is a corresponding senior author of the 2026 Nature sorghum pangenome, and co-founded Agrela Ecosystems, maker of the PheNode environmental sensing platform.</p>
+    </div>
   </div>
 
   <h2 class="section-title">Poster Presentations</h2>
-  <p class="section-sub">Six posters, six presenters — browse the full team lineup below.</p>
 
-  <div class="grid" id="poster-grid"></div>
+  <div id="poster-groups"></div>
 
-  <div class="intro-card" style="margin-top:-12px;">
-    <h2>Photos coming soon</h2>
-    <p class="photo-note">We're adding real team photos here shortly — for now presenters are shown with initials. Check back for updated headshots from our lab page.</p>
+  <div class="section-divider"></div>
+
+  <div class="contact-card">
+    <img class="contact-avatar-img" src="assets/photos/marie.jpg" alt="Marie de Gracia Coquerel">
+    <div class="contact-body">
+      <h2>Get in touch with Marie</h2>
+      <p>Have a question about the poster, or just want to say hi? I'd love to hear from you — send me a note and I'll get back to you after the conference.</p>
+      <div class="contact-links">
+        <a class="btn btn-solid" href="mailto:mdegracia@danforthcenter.org?subject=Hello%20from%20the%20Global%20Sorghum%20Conference%202026">Send me a message</a>
+        <a class="email-link" href="mailto:mdegracia@danforthcenter.org">mdegracia@danforthcenter.org</a>
+      </div>
+    </div>
   </div>
 
 </div>
@@ -209,81 +347,101 @@
 </footer>
 
 <script>
-const posters = [
+const themeGroups = [
   {
-    title: "Multi-Year Evaluation of Commercial Sorghum Hybrid Responses to Contrasting Management Practices",
-    presenter: "Marie de Gracia Coquerel",
-    role: "Presenter",
-    summary: "Evaluates how commercial sorghum hybrids respond to contrasting management practices across multiple years, integrating agronomic, root/soil, and seed composition data. Hybrid performance varies meaningfully by treatment, revealing trait profiles linked to more favorable outcomes.",
-    authors: "M. de Gracia Coquerel · Shakoor Lab, Danforth Plant Science Center",
-    color: "#4f9a5a",
-    featured: true,
-    featuredLabel: "This is Marie's poster"
+    theme: "Managing grain, forage, and biomass sorghum production to optimize yield, quality and systems resilience to maximize economic returns",
+    posters: [
+      {
+        title: "Multi-Year Evaluation of Commercial Sorghum Hybrid Responses to Contrasting Management Practices",
+        presenter: "Marie de Gracia Coquerel, PhD",
+        role: "Presenter",
+        photo: "assets/photos/marie.jpg",
+        summary: "Evaluates how commercial sorghum hybrids respond to contrasting management practices across multiple years, integrating agronomic, root/soil, and seed composition data. Hybrid performance varies meaningfully by treatment, revealing trait profiles linked to more favorable outcomes.",
+        authors: "<strong>Marie de Gracia Coquerel</strong>, Jocelyn Saxton, Boubacar Gano, Nathaniel Eck, Nurzaman Ahmed, Jaccob Stanton, Nadia Shakoor",
+        featured: true,
+        featuredLabel: "This is Marie's poster"
+      },
+      {
+        title: "TraitAI: Multi-Trait Modeling of Sorghum Yield, Grain Quality, and Nutritional Composition",
+        presenter: "Jaccob Stanton",
+        role: "Presenter",
+        photo: "assets/photos/jaccob.jpg",
+        summary: "A multi-trait modeling framework linking sorghum yield, grain quality, and nutritional composition (protein, starch, fiber, oil) to field, environmental, and compositional data, supporting breeding and end-use applications.",
+        authors: "Jaccob Stanton, Boubacar Gano, Nurzaman Ahmed, Nathaniel Eck, <strong>Marie de Gracia Coquerel</strong>, Nadia Shakoor"
+      }
+    ]
   },
   {
-    title: "Integrating Historical PVP Records and Multi-Environment Phenotyping in an Interactive Ex-PVP Sorghum Atlas",
-    presenter: "Sasi Velchuri",
-    role: "Presenter",
-    summary: "Integrates multi-year field and controlled-environment phenotyping with historical USDA Plant Variety Protection (PVP) records for 45 ex-PVP sorghum inbreds, building an interactive atlas linking historical and modern trait data by accession.",
-    authors: "S. Velchuri, N. Eck, M. de Gracia Coquerel, J. Saxton, J. Stanton, N. Shakoor · Danforth Plant Science Center",
-    color: "#2f6b3a"
+    theme: "Emerging technologies and their application potential – commercialization opportunities for the sorghum industry",
+    posters: [
+      {
+        title: "Lodging Gated Fusion Network (LGF-Net): A Spatial Attention-Based Multimodal Network for Lodging Type and Severity Prediction",
+        presenter: "Boubacar Gano, PhD",
+        role: "Presenter",
+        photo: "assets/photos/boubacar.jpg",
+        summary: "A multimodal deep learning model fusing multispectral imagery with agronomic data to predict sorghum lodging type and severity, improving accuracy by up to 21% (type) and 42% (severity) over standard CNN approaches.",
+        authors: "Boubacar Gano, Jocelyn Saxton, <strong>Marie de Gracia Coquerel</strong>, Grace Chambers, Nadia Shakoor"
+      },
+      {
+        title: "SubterraAI: Adaptive AI-Enabled Minirhizotron Phenotyping for Root Trait Discovery in Sorghum",
+        presenter: "Nurzaman Ahmed, PhD",
+        role: "Presenter",
+        photo: "assets/photos/nurzaman.jpg",
+        summary: "An adaptive AI framework that converts minirhizotron root images into quantitative phenotypes using a human-in-the-loop annotation and model-updating strategy, validated through a large-scale root-area GWAS.",
+        authors: "Nurzaman Ahmed, <strong>Marie de Gracia Coquerel</strong>, Nathaniel Eck, Boubacar Gano, Jaccob Stanton, Ceferino Patino, Navin Narayanan, Jocelyn Saxton, Nadia Shakoor"
+      },
+      {
+        title: "Integrating Historical PVP Records and Multi-Environment Phenotyping in an Interactive Ex-PVP Sorghum Atlas",
+        presenter: "Sasi Velchuri",
+        role: "Presenter",
+        photo: "assets/photos/sasi.jpg",
+        summary: "Integrates multi-year field and controlled-environment phenotyping with historical USDA Plant Variety Protection (PVP) records for 45 ex-PVP sorghum inbreds, building an interactive atlas linking historical and modern trait data by accession.",
+        authors: "Sasi Velchuri, Nathaniel Eck, <strong>Marie de Gracia Coquerel</strong>, Jocelyn Saxton, Jaccob Stanton, Nadia Shakoor"
+      }
+    ]
   },
   {
-    title: "Lodging Gated Fusion Network (LGF-Net): A Spatial Attention-Based Multimodal Network for Lodging Type and Severity Prediction",
-    presenter: "Boubacar Gano",
-    role: "Presenter",
-    summary: "A multimodal deep learning model fusing multispectral imagery with agronomic data to predict sorghum lodging type and severity, improving accuracy by up to 21% (type) and 42% (severity) over standard CNN approaches.",
-    authors: "B. Gano · Shakoor Lab, Danforth Plant Science Center",
-    color: "#c98a2c"
-  },
-  {
-    title: "SubterraAI: Adaptive AI-Enabled Minirhizotron Phenotyping for Root Trait Discovery in Sorghum",
-    presenter: "Nurzaman Ahmed",
-    role: "Presenter",
-    summary: "An adaptive AI framework that converts minirhizotron root images into quantitative phenotypes using a human-in-the-loop annotation and model-updating strategy, validated through a large-scale root-area GWAS.",
-    authors: "N. Ahmed · Shakoor Lab, Danforth Plant Science Center",
-    color: "#7a5ea8"
-  },
-  {
-    title: "TraitAI: Multi-Trait Modeling of Sorghum Yield, Grain Quality, and Nutritional Composition",
-    presenter: "Jaccob Stanton",
-    role: "Presenter",
-    summary: "A multi-trait modeling framework linking sorghum yield, grain quality, and nutritional composition (protein, starch, fiber, oil) to field, environmental, and compositional data, supporting breeding and end-use applications.",
-    authors: "J. Stanton · Shakoor Lab, Danforth Plant Science Center",
-    color: "#3f7ea6"
-  },
-  {
-    title: "A Long-Term Sorghum Diversity Trial Enables GWAS of Above- and Below-Ground Traits Across Contrasting Field Environments",
-    presenter: "Nathaniel Eck",
-    role: "Presenter",
-    summary: "Results from a long-term diversity trial of 344 sorghum lines across Missouri and South Carolina, where GWAS identified marker-trait associations for above- and below-ground traits, some persisting across years and locations.",
-    authors: "N. Eck · Shakoor Lab, Danforth Plant Science Center",
-    color: "#b5544a"
+    theme: "Capturing sorghum yield potential leveraging advances in genomics for enhancing yield gain and stress resilience",
+    posters: [
+      {
+        title: "A Long-Term Sorghum Diversity Trial Enables GWAS of Above- and Below-Ground Traits Across Contrasting Field Environments",
+        presenter: "Nathaniel Eck",
+        role: "Presenter",
+        photo: "assets/photos/nathaniel.jpg",
+        summary: "Results from a long-term diversity trial of 344 sorghum lines across Missouri and South Carolina, where GWAS identified marker-trait associations for above- and below-ground traits, some persisting across years and locations.",
+        authors: "Nathaniel Eck, Jocelyn Saxton, <strong>Marie de Gracia Coquerel</strong>, Boubacar Gano, Nadia Shakoor"
+      }
+    ]
   }
 ];
 
-function initials(name){
-  return name.split(" ").map(w => w[0]).join("").slice(0,2).toUpperCase();
+function posterCard(p){
+  const card = document.createElement("div");
+  card.className = "session-card" + (p.featured ? " featured" : "");
+  card.innerHTML = `
+    ${p.featured ? `<div class="session-tag gold">${p.featuredLabel}</div>` : ""}
+    <img class="session-photo" src="${p.photo}" alt="${p.presenter}">
+    <div class="session-body">
+      <p class="session-name">${p.presenter}</p>
+      <p class="session-role">${p.role}</p>
+      <p class="session-title">${p.title}</p>
+      <p class="session-summary">${p.summary}</p>
+      <p class="session-authors">${p.authors}</p>
+    </div>
+  `;
+  return card;
 }
 
-const grid = document.getElementById("poster-grid");
-posters.forEach(p => {
-  const card = document.createElement("div");
-  card.className = "poster-card" + (p.featured ? " featured" : "");
-  card.innerHTML = `
-    ${p.featured ? `<div class="featured-tag">${p.featuredLabel}</div>` : ""}
-    <div class="presenter-row">
-      <div class="avatar" style="background:${p.color}">${initials(p.presenter)}</div>
-      <div>
-        <div class="presenter-name">${p.presenter}</div>
-        <div class="presenter-role">${p.role}</div>
-      </div>
-    </div>
-    <p class="poster-title">${p.title}</p>
-    <p class="poster-summary">${p.summary}</p>
-    <p class="authors">${p.authors}</p>
-  `;
-  grid.appendChild(card);
+const container = document.getElementById("poster-groups");
+themeGroups.forEach(group => {
+  const section = document.createElement("div");
+  section.className = "theme-group";
+  const heading = document.createElement("div");
+  heading.className = "theme-heading";
+  heading.textContent = group.theme;
+  section.appendChild(heading);
+  group.posters.forEach(p => section.appendChild(posterCard(p)));
+  container.appendChild(section);
 });
 </script>
 
